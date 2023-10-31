@@ -1,0 +1,213 @@
+// HEADER
+
+@mixin backgroundimg($url) {
+  background-image: url("#{$url}");
+  background-repeat: no-repeat;
+  background-position: left;
+  min-height: 90vh;
+}
+
+%spacing {
+  margin: 0px 2rem;
+}
+
+.hero-text {
+  @extend %spacing;
+}
+
+.hero-img {
+  @extend %images;
+}
+
+// DEFAULT STYLES
+
+// text
+@mixin headings {
+  font-family: "Big Shoulders Display", sans-serif;
+  font-size: 6rem;
+  font-weight: 800;
+  color: #151515;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+h1 {
+  @include headings;
+  line-height: 5.5rem;
+  padding: 3rem 0rem;
+}
+
+h2 {
+  @include headings;
+  font-size: 5rem;
+  line-height: 4.5rem;
+  padding-bottom: 2.4rem;
+}
+
+p {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #151515;
+  line-height: 2.8rem;
+}
+
+//IMAGES
+%images {
+  width: 100%;
+}
+
+// BUTTONS
+
+button {
+  display: flex;
+  justify-content: space-evenly;
+  @include headings;
+  font-size: 2rem;
+  color: #ffffff;
+  background-color: #151515;
+  border: none;
+  padding: 2.4rem 3.2rem;
+  margin: 2rem 0rem;
+
+  &:hover,
+  &:focus-within {
+    color: #151515;
+    background-color: #d5966c;
+  }
+}
+
+//body
+
+//grid-container (will be switched on in media queries
+.grid-container {
+  @extend %spacing;
+  padding: 8rem 0rem;
+  & img {
+    width: 100%;
+    padding: 1rem 0rem;
+  }
+  & .grid-text-card {
+    padding: 1rem 0rem;
+  }
+  & :nth-child(5) {
+    background-color: #151515;
+    padding: 4rem 2rem;
+  }
+  & :nth-child(5) > h2,
+  :nth-child(5) > p {
+    color: white;
+  }
+}
+
+// footer
+footer {
+  background-color: #151515;
+  padding: 4rem 3rem;
+
+  & p {
+    color: #ffffff;
+    padding: 3rem 0rem;
+  }
+  & .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+}
+//media queries
+
+// grid container mixin set up for higher screen sizes
+@mixin gridContainer {
+  margin: 5rem;
+  grid-gap: 2rem;
+  display: grid;
+  grid-template-areas:
+    " grid-top-left grid-top-left grid-top-right grid-top-right grid-top-right grid-top-right grid-top-right grid-top-right"
+    "grid-left grid-left grid-left grid-left grid-left grid-left grid-right grid-right "
+    "grid-left grid-left grid-left grid-left grid-left grid-left grid-bottom-right grid-bottom-right ";
+
+  .grid-top-left {
+    grid-area: grid-top-left;
+  }
+  .grid-top-right {
+    grid-area: grid-top-right;
+  }
+  .grid-left {
+    grid-area: grid-left;
+  }
+  .grid-right {
+    grid-area: grid-right;
+  }
+  .grid-bottom-right {
+    grid-area: grid-bottom-right;
+  }
+
+  & img {
+    padding: 0px;
+  }
+}
+
+//tablet
+
+@media screen and (min-width: 650px) {
+  header {
+    @include backgroundimg("./assets/tablet/image-hero.jpg");
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50vw;
+  }
+  .hero-img {
+    display: none;
+  }
+  .hero-text {
+    padding-right: 6rem;
+  }
+
+  .grid-container {
+    @include gridContainer;
+  }
+}
+
+//desktop
+
+@media screen and (min-width: 1000px) {
+  header {
+    background-image: url(./assets/desktop/image-hero.jpg),
+      linear-gradient((to right, #151515 50%, #ffffff 50%));
+    // @include backgroundimg("./assets/desktop/image-hero.jpg");
+    background-position: center, left, right;
+    background-size: contain;
+    background-color: #151515;
+    padding-left: initial;
+    height: 100vh;
+  }
+
+  .hero-text {
+    display: flex;
+    justify-content: space-between;
+    margin: 14rem;
+    padding-right: 0rem;
+
+    & h1 {
+      font-size: 9.5rem;
+      line-height: 9.5rem;
+      color: rgb(255, 255, 255);
+      mix-blend-mode: exclusion;
+      max-width: 30vw;
+      padding-top: 0px;
+    }
+    & .hero-para-btn {
+      max-width: 30vw;
+    }
+  }
+
+  .grid-container {
+    @include gridContainer;
+    margin: 4rem 8rem;
+  }
+  .grid-top-left {
+    margin: auto;
+    width: 80%;
+  }
+}
